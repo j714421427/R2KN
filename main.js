@@ -65,6 +65,20 @@
     $(document).on("click", ".hero div.divTableCell", function () {
         CombineHeroHandler($(this).find(".main").attr("Id"));
     });
+	
+	$(document).on("click", ".displayHero .oc", function () {
+
+        var ishidden = $(".displayHero .divTableBody").is(":hidden");
+
+        if (ishidden) {
+            $(".displayHero .divTableBody").show();
+            $(this).text("－");
+        }
+        else {
+            $(".displayHero .divTableBody").hide();
+            $(this).text("＋");
+        }
+    });
 
     //init
     function Init() {
@@ -148,13 +162,10 @@
     function SetDisplay(id) {
         var selectedHero = $("#" + id).clone();
 
-        $(".displayHero .selectedHero").append(selectedHero);
+        $(".hero" + modeSH +" .enable").each(function () {
 
-        heroCount.forEach(function (item, index) {
-
-            var mainDiv = $(".hero" + modeSH).find("#" + item.Id);
-            var tdDiv = mainDiv.parent();
-            var id = mainDiv.attr("id");
+            var tdDiv = $(this).parent();
+            var id = $(this).attr("id");
             if (id) {
                 var level = id.length.toString(2).length;
                 $(".displayHero .T" + level).append(tdDiv.clone().removeClass("T" + level).addClass("selectedCombineHero"));

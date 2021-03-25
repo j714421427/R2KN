@@ -509,6 +509,7 @@
 
 
 		<div class="divTable displayHero">
+			<div class="oc">－</div>
 			<div class="divTableBody">
 				<div class="divTableRow">
 					<div class="divTableCell selectedHero">
@@ -579,7 +580,7 @@
 		}
 
 		.countDiv {
-			margin-top: -30px;
+			margin-top: -20px;
 			text-align: right;
 			font-weight: 800;
 			background-color: rgba(255,255,255,0.2);
@@ -598,35 +599,60 @@
 			max-width: fit-content;
 		}
 
-		.hero .main {
-			width: 132px;
-			height: 58px;
-			background-repeat: no-repeat;
-			background-size: 132px 58px;
-		}
+			.hero .main {
+				width: 132px;
+				height: 58px;
+				background-repeat: no-repeat;
+				background-size: 132px 58px;
+			}
 
 		.simple {
 			width: 50px !important;
 		}
 
 		.displayHero {
-			max-width: fit-content;
+			width: 60vw !important;
 			position: fixed;
 			top: 50px;
 			right: 0;
 			background-color: rgb(255,255,255);
-			opacity:0.3;
+			opacity: 0.3;
 		}
+
 			.displayHero:hover {
 				opacity: 1.0;
 			}
 
-		.displayHero .main {
-			width: 50px;
-			height: 58px;
-			background-repeat: no-repeat;
-			background-size: 132px 58px;
-		}
+			.displayHero .oc {
+				position: absolute;
+				border: 1px solid black;
+				cursor: pointer;
+			}
+
+				.displayHero .oc:active {
+					background-color: gray;
+				}
+
+			.displayHero .main {
+				width: 50px;
+				height: 58px;
+				background-repeat: no-repeat;
+				background-size: 132px 58px;
+			}
+
+			.displayHero .combinHero {
+				width: 30vw;
+				overflow-x: scroll;
+			}
+
+			.displayHero .skill {
+				width: 24vw;
+			}
+
+			.displayHero .skill .content {
+				width: 100%;
+				height: 58px;
+			}
 
 		.selectedHero {
 			vertical-align: middle;
