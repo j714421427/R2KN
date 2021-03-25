@@ -1,289 +1,353 @@
-			var oldId = "";
-			var heroCount = [];
-			var occupations = ["S", "A", "T", "M", "P", "W", "K", "E"];
-			var modeSH = "";
 
-			$(document).ready(function () {
-				Init();
-			});
+    var historyId = [];
+    var heroCount = [];
+    var modeSH = "";
 
-			$(document).on("click", "#normal", function () {
-				ChangeMode("normal");
-				$("#normal").hide();
-				$("#simple").show();
-			});
+    $(document).ready(function () {
 
-			$(document).on("click", "#simple", function () {
-				ChangeMode("simple");
-				$("#normal").show();
-				$("#simple").hide();
-			});
+        Init();
 
-			$(document).on("click", "#horizontal", function () {
-				ChangeMode("horizontal");
-				$("#horizontal").hide();
-				$("#straight").show();
-			});
+        $(document).get(0).oncontextmenu = function () {
 
-			$(document).on("click", "#straight", function () {
-				ChangeMode("straight");
-				$("#horizontal").show();
-				$("#straight").hide();
-			});
+            //returnHero
+            var nowId = historyId.pop();
+            var oldId = historyId.pop();
 
-			$(document).on("click", ".hero div.main", function () {
+            if (oldId) {
+                CombineHeroHandler(oldId);
+            }
+            else {
+                historyId.push(nowId);
+            }
 
-				//resetCount
-				ReSetCount();
+            return false;
+        };
+    });
 
-				var newId = $(this).attr("Id");
+    $(document).on("click", "#historyUpdate", function () {
 
-				if (oldId == newId) {
+        var ishidden = $(".historyUpdateContent").is(":hidden");
 
-					SetStatus(true);
+        if (ishidden) {
+            $(".historyUpdateContent").show();
+            $("#historyUpdate").val("隱藏歷史修改內容");
+        }
+        else {
+            $(".historyUpdateContent").hide();
+            $("#historyUpdate").val("顯示歷史修改內容");
+        }
+    });
 
-					oldId = "";
-				}
-				else {
-					SetStatus(false);
+    $(document).on("click", "#normal", function () {
+        ChangeMode("normal");
+        $("#normal").hide();
+        $("#simple").show();
+    });
 
-					SetAllHero(newId);
+    $(document).on("click", "#simple", function () {
+        ChangeMode("simple");
+        $("#normal").show();
+        $("#simple").hide();
+    });
 
-					oldId = newId;
-				}
+    $(document).on("click", "#horizontal", function () {
+        ChangeMode("horizontal");
+        $("#horizontal").hide();
+        $("#straight").show();
+    });
 
+    $(document).on("click", "#straight", function () {
+        ChangeMode("straight");
+        $("#horizontal").show();
+        $("#straight").hide();
+    });
 
-			});
+    $(document).on("click", ".hero div.divTableCell", function () {
+        CombineHeroHandler($(this).find(".main").attr("Id"));
+    });
 
-			//init
-			function Init() {
+    //init
+    function Init() {
 
-				//set name file
-				SetFileH();
-				SetFileS();
+        //set name file
+        SetFileH();
+        SetFileS();
 
-				//set status
-				SetStatus(true);
+        //set status
+        SetStatus(true);
 
-				//hidden
-				$("#normal").hide();
-				$("#horizontal").hide();
-				$(".heroS").hide();
-				modeSH = "H";
-			}
+        //hidden
+        $("#normal").hide();
+        $("#horizontal").hide();
+        $(".heroS").hide();
+        $(".displayHero").hide();
+        $("#historyUpdate").click();
+        modeSH = "H";
+    }
 
-			function SetAllHero(id) {
+    function CombineHeroHandler(id) {
 
-				var level = id.length.toString(2).length;
-				var highest = 5;
+        //resetCount
+        ReSetCount();
 
-				for (var i = 1; i <= highest; i++) {
+        var newId = id;
 
-					if (i < level) {
+        if (historyId[historyId.length - 1] == newId) {
 
-						//set lowHero
-						SetLevelHero(id, i, 1);
-					}
-					else if (i > level) {
+            SetStatus(true);
 
-						//set highHero
-						SetLevelHero(id, i, 2);
-					}
-					else {
+            ReSetDisplay();
 
-						//set itself
-						SetStatus(true, id);
-					}
-				}
+            historyId = [];
+        }
+        else {
+            SetStatus(false);
 
-				SetCount();
-			}
+            SetAllHero(newId);
 
-			//type 1:low 2:high
-			function SetLevelHero(id, level, type) {
+            historyId.push(newId);
+        }
+    }
 
-				var heroId = "";
+    function SetAllHero(id) {
 
-				switch (type) {
+        var level = id.length.toString(2).length;
+        var highest = 5;
 
-					//set low
-					case 1:
+        for (var i = 1; i <= highest; i++) {
 
-						for (var i = 0; i < id.length; i++) {
+            if (i < level) {
 
-							heroId += id[i];
+                //set lowHero
+                SetLevelHero(id, i, 1);
+            }
+            else if (i > level) {
 
-							if ((i + 1) % Math.pow(2, level - 1) == 0) {
+                //set highHero
+                SetLevelHero(id, i, 2);
+            }
+            else {
 
-								SetStatus(true, heroId)
+                //set itself
+                SetStatus(true, id);
+            }
+        }
 
-								if (type) {
+        SetCount();
 
-									//log count
-									var hero = heroCount.find(f => f.Id == heroId);
+        ReSetDisplay();
 
-									if (hero) {
-										hero.Count++;
-									}
-									else {
-										hero = { Id: heroId, Count: 1 };
-										heroCount.push(hero);
-									}
-								}
+        SetDisplay(id);
+    }
 
-								heroId = "";
-							}
-						}
+    function ReSetDisplay() {
+        $(".displayHero .main, .displayHero .countDiv, .displayHero .selectedCombineHero").remove();
+        $(".displayHero").hide();
+    };
 
-						break;
-
-					//set high
-					case 2:
-
-						$(".T" + level + " .main").each(function () {
+    function SetDisplay(id) {
+        var selectedHero = $("#" + id).clone();
 
-							heroId = $(this).attr("Id");
-
-							if (heroId) {
-								var combinHero = "";
+        $(".displayHero .selectedHero").append(selectedHero);
 
-								for (var i = 0; i < heroId.length; i++) {
-									combinHero += heroId[i];
-									if ((i + 1) % id.length == 0) {
-										if (combinHero == id) {
-											SetStatus(true, heroId);
-										}
-										combinHero = "";
-									}
-								}
-							}
+        heroCount.forEach(function (item, index) {
 
-						});
-
-						break;
-				}
-
-
-			}
-
-			function ReSetCount() {
-
-				$(".countDiv").addClass("visHidden").find("p").text("X 0");
-				//$(".countDiv").removeClass("countDiv").find("p").text("X 0");
+            var mainDiv = $(".hero" + modeSH).find("#" + item.Id);
+            var tdDiv = mainDiv.parent();
+            var id = mainDiv.attr("id");
+            if (id) {
+                var level = id.length.toString(2).length;
+                $(".displayHero .T" + level).append(tdDiv.clone().removeClass("T" + level).addClass("selectedCombineHero"));
+            }
+        });
 
-				heroCount = [];
-			}
-
-			function SetCount() {
-
-				heroCount.forEach(function (item, index) {
-					var countDiv = $(".hero" + modeSH).find("#" + item.Id).siblings("div");
-					countDiv.removeClass("visHidden").find("p").text("X " + item.Count);
-				});
-			}
-
-			function SetStatus(status, id) {
-
-				var statusClass = "";
-
-				switch (status) {
-					case true:
-						statusClass = "enable";
-						break;
-					case false:
-						statusClass = "disable";
-						break;
-					default:
-						statusClass = "enable";
-						break;
-				}
-
-				if (!id) {
-
-					$(".hero" + modeSH + " div.main").each(function (e) {
-						$(this).removeClass("enable");
-						$(this).removeClass("disable");
-						$(this).addClass(statusClass);
-					});
-				}
-				else {
-					$(".hero" + modeSH).find("#" + id).removeClass("enable");
-					$(".hero" + modeSH).find("#" + id).removeClass("disable");
-					$(".hero" + modeSH).find("#" + id).addClass(statusClass);
-				}
-			}
-
-			function ChangeMode(mode) {
-
-				switch (mode) {
-					case "simple":
-						$(".main").addClass(mode);
-						break;
-					case "normal":
-						$(".main").removeClass().addClass("main");
-						break;
-					case "straight":
-						modeSH = "S";
-						$(".heroH").hide();
-						$(".heroS").show();
-						SetStatus(true);
-						break;
-					case "horizontal":
-						modeSH = "H";
-						$(".heroH").show();
-						$(".heroS").hide();
-						SetStatus(true);
-						break;
-					default:
-						break;
-				}
-
-			}
-
-			function SetFileH() {
-				var path = "Img/";
-				var extName = ".jpg";
-
-				$(".heroH div.main").each(function (e) {
-
-					var id = $(this).attr("Id");
-					var occupation = $(this).closest(".divTableRow").attr("occupation");
-					var level = id.length.toString(2).length;
-					$(this).closest(".divTableCell").addClass("T" + level);
-					$(this).closest(".divTableRow").addClass(occupation);
-
-					if (id) {
-						var filePath = path + occupation + "/" + id + extName;
-
-						var countDiv = $("<div/>").addClass("countDiv").addClass("visHidden").append($("<p/>").text("X 0"));
-						$(this).css("background-image", "url(" + filePath + ")").after(countDiv);
-					}
-					else {
-						$(this).parent().addClass("none");
-					}
-				});
-			};
-
-			function SetFileS() {
-				var path = "Img/";
-				var extName = ".jpg";
-
-				$(".heroS div.main").each(function (e) {
-
-					var id = $(this).attr("Id");
-					var occupation = occupations[$(this).closest("div.divTableRow").find(".main").index(this)];
-					var level = id.length.toString(2).length;
-					$(this).closest(".divTableCell").addClass(occupation);
-					$(this).closest(".divTableRow").addClass("T" + level);
-
-					if (id) {
-						var filePath = path + occupation + "/" + id + extName;
-
-						var countDiv = $("<div/>").addClass("countDiv").addClass("visHidden").append($("<p/>").text("X 0"));
-						$(this).css("background-image", "url(" + filePath + ")").after(countDiv);
-					}
-					else {
-						$(this).parent().addClass("none");
-					}
-				});
-			};
+        $(".displayHero").show();
+    };
+
+
+    //type 1:low 2:high
+    function SetLevelHero(id, level, type) {
+
+        var heroId = "";
+
+        switch (type) {
+
+            //set low
+            case 1:
+
+                for (var i = 0; i < id.length; i++) {
+
+                    heroId += id[i];
+
+                    if ((i + 1) % Math.pow(2, level - 1) == 0) {
+
+                        SetStatus(true, heroId)
+
+                        if (type) {
+
+                            //log count
+                            var hero = heroCount.find(f => f.Id == heroId);
+
+                            if (hero) {
+                                hero.Count++;
+                            }
+                            else {
+                                hero = { Id: heroId, Count: 1 };
+                                heroCount.push(hero);
+                            }
+                        }
+
+                        heroId = "";
+                    }
+                }
+
+                break;
+
+            //set high
+            case 2:
+
+                $(".T" + level + " .main").each(function () {
+
+                    heroId = $(this).attr("Id");
+
+                    if (heroId) {
+                        var combinHero = "";
+
+                        for (var i = 0; i < heroId.length; i++) {
+                            combinHero += heroId[i];
+                            if ((i + 1) % id.length == 0) {
+                                if (combinHero == id) {
+                                    SetStatus(true, heroId);
+                                }
+                                combinHero = "";
+                            }
+                        }
+                    }
+
+                });
+
+                break;
+        }
+
+
+    }
+
+    function ReSetCount() {
+        $(".countDiv").addClass("visHidden").find("p").text("X 0");
+
+        heroCount = [];
+    }
+
+    function SetCount() {
+
+        heroCount.forEach(function (item, index) {
+            var countDiv = $(".hero" + modeSH).find("#" + item.Id).siblings("div");
+            countDiv.removeClass("visHidden").find("p").text("X " + item.Count);
+        });
+    }
+
+    function SetStatus(status, id) {
+
+        var statusClass = "";
+
+        switch (status) {
+            case true:
+                statusClass = "enable";
+                break;
+            case false:
+                statusClass = "disable";
+                break;
+            default:
+                statusClass = "enable";
+                break;
+        }
+
+        if (!id) {
+
+            $(".hero" + modeSH + " div.main").each(function (e) {
+                $(this).removeClass("enable");
+                $(this).removeClass("disable");
+                $(this).addClass(statusClass);
+            });
+        }
+        else {
+            $(".hero" + modeSH).find("#" + id).removeClass("enable");
+            $(".hero" + modeSH).find("#" + id).removeClass("disable");
+            $(".hero" + modeSH).find("#" + id).addClass(statusClass);
+        }
+    }
+
+    function ChangeMode(mode) {
+
+        switch (mode) {
+            case "simple":
+                $(".hero .main").addClass(mode);
+                break;
+            case "normal":
+                $(".hero .main").removeClass().addClass("main");
+                break;
+            case "straight":
+                modeSH = "S";
+                $(".heroH").hide();
+                $(".heroS").show();
+                CombineHeroHandler(historyId[historyId.length - 1]);
+                break;
+            case "horizontal":
+                modeSH = "H";
+                $(".heroH").show();
+                $(".heroS").hide();
+                CombineHeroHandler(historyId[historyId.length - 1]);
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    function SetFileH() {
+        var path = "Img/";
+        var extName = ".jpg";
+
+        $(".heroH div.main").each(function (e) {
+
+            var id = $(this).attr("Id");
+            var occupation = $(this).closest(".divTableRow").attr("occupation");
+            var level = id.length.toString(2).length;
+            $(this).closest(".divTableCell").addClass("T" + level);
+            $(this).closest(".divTableRow").addClass(occupation);
+
+            if (id) {
+                var filePath = path + occupation + "/" + id + extName;
+
+                var countDiv = $("<div/>").addClass("countDiv").addClass("visHidden").append($("<p/>").text("X 0"));
+                $(this).css("background-image", "url(" + filePath + ")").after(countDiv);
+            }
+            else {
+                $(this).parent().addClass("none");
+            }
+        });
+    };
+
+    function SetFileS() {
+        var path = "Img/";
+        var extName = ".jpg";
+
+        $(".heroS div.main").each(function (e) {
+
+            var id = $(this).attr("Id");
+            var occupation = occupations[$(this).closest("div.divTableRow").find(".main").index(this)];
+            var level = id.length.toString(2).length;
+            $(this).closest(".divTableCell").addClass(occupation);
+            $(this).closest(".divTableRow").addClass("T" + level);
+
+            if (id) {
+                var filePath = path + occupation + "/" + id + extName;
+
+                var countDiv = $("<div/>").addClass("countDiv").addClass("visHidden").append($("<p/>").text("X 0"));
+                $(this).css("background-image", "url(" + filePath + ")").after(countDiv);
+            }
+            else {
+                $(this).parent().addClass("none");
+            }
+        });
+    };

@@ -6,18 +6,38 @@
 
 		<script src="jquery-3.6.0.min.js"></script>
 		<script src="main.js"></script>
+		<script src="database.js"></script>
 		
 	</head>
 
 	<body>
 
 		<h2>R2KN</h2>
-		<h3 style="font-size:50px">Beta 1.0</h5>
+		<h3 style="font-size:50px">Beta 1.1</h3>
+		<div>
+			修改內容<br />
+			1.新增 組合秘笈 垂直/水平 功能<br />
+			2.新增 組合秘笈 右鍵返回英雄 EX: 1.左鍵點 女武神 2.左鍵點 符文騎士 3.點右鍵回 女武神<br />
+			3.新增 組合秘笈 右上快速顯示<br />
+		</div>
+		<br />
+		<input id="historyUpdate" type="button"/>
 
-		<input type="button" id="normal" value="normal" />
-		<input type="button" id="simple" value="simple" />
-		<input type="button" id="horizontal" value="horizontal" />
-		<input type="button" id="straight" value="straight" />
+		<div class="historyUpdateContent">
+			歷史<br />
+			Beta 1.0<br />
+			1.新增 組合秘笈<br />
+			2.新增 組合秘笈 簡易/標準版 功能<br />
+		</div>
+
+		<br />
+
+		<input type="button" id="normal" value="標準" />
+		<input type="button" id="simple" value="簡易" />
+
+		<input type="button" id="horizontal" value="水平" />
+		<input type="button" id="straight" value="垂直" />
+
 		<br />
 		<br />
 
@@ -68,7 +88,7 @@
 					<div class="divTableCell"><div class="main" id="SSTTWWKK"></div></div>
 					<div class="divTableCell"><div class="main" id=""></div></div>
 
-					<div class="divTableCell"><div class="main" id="SKSSMPWWYYMMATMW"></div></div>
+					<div class="divTableCell"><div class="main" id="SKSSMPWWTTMMATMW"></div></div>
 					<div class="divTableCell"><div class="main" id="SKSSTTAPSKKESSWW"></div></div>
 					<div class="divTableCell"><div class="main" id="SKKESSWWSKSSSKKE"></div></div>
 					<div class="divTableCell"><div class="main" id="SSTTWWKKSSWWAAKK"></div></div>
@@ -138,17 +158,17 @@
 					<div class="divTableCell"><div class="main" id="MMMW"></div></div>
 					<div class="divTableCell"><div class="main" id="ATMW"></div></div>
 
-					<div class="divTableCell"><div class="main" id="MMPEYYMM"></div></div>
-					<div class="divTableCell"><div class="main" id="YYMMATMW"></div></div>
+					<div class="divTableCell"><div class="main" id="MMPETTMM"></div></div>
+					<div class="divTableCell"><div class="main" id="TTMMATMW"></div></div>
 					<div class="divTableCell"><div class="main" id="SKSTMMMW"></div></div>
 					<div class="divTableCell"><div class="main" id="ATAPMMMW"></div></div>
 					<div class="divTableCell"><div class="main" id="MMPEMWWE"></div></div>
 					<div class="divTableCell"><div class="main" id="ATMWMWPE"></div></div>
-					<div class="divTableCell"><div class="main" id="YYMMMMMW"></div></div>
+					<div class="divTableCell"><div class="main" id="TTMMMMMW"></div></div>
 
-					<div class="divTableCell"><div class="main" id="MMPEYYMMYYMMATMW"></div></div>
+					<div class="divTableCell"><div class="main" id="MMPETTMMTTMMATMW"></div></div>
 					<div class="divTableCell"><div class="main" id="ATAPMMMWMPPEPPP0"></div></div>
-					<div class="divTableCell"><div class="main" id="ATMWMWPEYYMMMMMW"></div></div>
+					<div class="divTableCell"><div class="main" id="ATMWMWPETTMMMMMW"></div></div>
 					<div class="divTableCell"><div class="main" id="SKSTMMMWMPPEATMP"></div></div>
 					<div class="divTableCell"><div class="main" id=""></div></div>
 					<div class="divTableCell"><div class="main" id=""></div></div>
@@ -345,7 +365,7 @@
 					<div class="divTableCell"><div class="main" id="SKSSTTAP"></div></div>
 					<div class="divTableCell"><div class="main" id="AAATATAP"></div></div>
 					<div class="divTableCell"><div class="main" id="SKSTMPPE"></div></div>
-					<div class="divTableCell"><div class="main" id="MMPEYYMM"></div></div>
+					<div class="divTableCell"><div class="main" id="MMPETTMM"></div></div>
 					<div class="divTableCell"><div class="main" id="SSWWPPP0"></div></div>
 					<div class="divTableCell"><div class="main" id="WWWEWEKE"></div></div>
 
@@ -357,7 +377,7 @@
 					<div class="divTableCell"><div class="main" id="SKSSMPWW"></div></div>
 					<div class="divTableCell"><div class="main" id="ATAPTTST"></div></div>
 					<div class="divTableCell"><div class="main" id="TTSTSKST"></div></div>
-					<div class="divTableCell"><div class="main" id="YYMMATMW"></div></div>
+					<div class="divTableCell"><div class="main" id="TTMMATMW"></div></div>
 					<div class="divTableCell"><div class="main" id="MMPETTAP"></div></div>
 					<div class="divTableCell"><div class="main" id="SSSTMWWE"></div></div>
 					<div class="divTableCell"><div class="main" id="WWWEWWKK"></div></div>
@@ -412,7 +432,7 @@
 					<div class="divTableCell"><div class="main" id=""></div></div>
 					<div class="divTableCell"><div class="main" id=""></div></div>
 					<div class="divTableCell"><div class="main" id=""></div></div>
-					<div class="divTableCell"><div class="main" id="YYMMMMMW"></div></div>
+					<div class="divTableCell"><div class="main" id="TTMMMMMW"></div></div>
 					<div class="divTableCell"><div class="main" id=""></div></div>
 					<div class="divTableCell"><div class="main" id=""></div></div>
 					<div class="divTableCell"><div class="main" id=""></div></div>
@@ -420,10 +440,10 @@
 				</div>
 				<div class="divTableRow T5">
 					<div class="divTableCell">T5</div>
-					<div class="divTableCell"><div class="main" id="SKSSMPWWYYMMATMW"></div></div>
+					<div class="divTableCell"><div class="main" id="SKSSMPWWTTMMATMW"></div></div>
 					<div class="divTableCell"><div class="main" id="AAATATAPATAPTTST"></div></div>
 					<div class="divTableCell"><div class="main" id="TTKEWWKKSSWEMWWE"></div></div>
-					<div class="divTableCell"><div class="main" id="MMPEYYMMYYMMATMW"></div></div>
+					<div class="divTableCell"><div class="main" id="MMPETTMMTTMMATMW"></div></div>
 					<div class="divTableCell"><div class="main" id="SSWWPPP0TTAPMPWW"></div></div>
 					<div class="divTableCell"><div class="main" id="TTAPMPWWSSWEMWWE"></div></div>
 					<div class="divTableCell"><div class="main" id="KKAKSKAKWWWEWWKK"></div></div>
@@ -445,7 +465,7 @@
 					<div class="divTableCell"><div class="main" id="SKKESSWWSKSSSKKE"></div></div>
 					<div class="divTableCell"><div class="main" id="SSWWAAKKSKSTMPPE"></div></div>
 					<div class="divTableCell"><div class="main" id="SKSTMPPETTSTSKST"></div></div>
-					<div class="divTableCell"><div class="main" id="ATMWMWPEYYMMMMMW"></div></div>
+					<div class="divTableCell"><div class="main" id="ATMWMWPETTMMMMMW"></div></div>
 					<div class="divTableCell"><div class="main" id="MMPETTAPMPPEPPP0"></div></div>
 					<div class="divTableCell"><div class="main" id="ATMWMWPESTMMSSWE"></div></div>
 					<div class="divTableCell"><div class="main" id="WWWEWWKKKKAKMPKK"></div></div>
@@ -485,14 +505,70 @@
 					<div class="divTableCell"><div class="main" id=""></div></div>
 				</div>
 			</div>
-			
-			
+		</div>
+
+
+		<div class="divTable displayHero">
+			<div class="divTableBody">
+				<div class="divTableRow">
+					<div class="divTableCell selectedHero">
+
+					</div>
+					<div class="divTableCell">
+						<div class="divInTable">
+							<div class="divTableBody">
+								<div class="divTableRow skill skill1">
+									<div class="divTableCell">技能 1 :</div>
+								</div>
+								<div class="divTableRow skill skill2">
+									<div class="divTableCell">技能 2 :</div>
+								</div>
+								<div class="divTableRow skill skill3">
+									<div class="divTableCell">技能 3 :</div>
+								</div>
+								<div class="divTableRow skill skill4">
+									<div class="divTableCell">技能 4 :</div>
+								</div>
+								<div class="divTableRow skill skill5">
+									<div class="divTableCell">技能 5 :</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="divTableCell">
+						<div class="divInTable">
+							<div class="divTableBody">
+								<div class="divTableRow T1">
+									<div class="divTableCell">T1</div>
+								</div>
+								<div class="divTableRow T2">
+									<div class="divTableCell">T2</div>
+								</div>
+								<div class="divTableRow T3">
+									<div class="divTableCell">T3</div>
+								</div>
+								<div class="divTableRow T4">
+									<div class="divTableCell">T4</div>
+								</div>
+								<div class="divTableRow T5">
+									<div class="divTableCell">T5</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 
 
 	</body>
 
+
 	<style>
+
+		input {
+			margin: 10px;
+		}
 
 		.enable {
 			opacity: unset;
@@ -518,7 +594,11 @@
 			visibility: hidden;
 		}
 
-		.main {
+		.hero {
+			max-width: fit-content;
+		}
+
+		.hero .main {
 			width: 132px;
 			height: 58px;
 			background-repeat: no-repeat;
@@ -527,6 +607,29 @@
 
 		.simple {
 			width: 50px !important;
+		}
+
+		.displayHero {
+			max-width: fit-content;
+			position: fixed;
+			top: 50px;
+			right: 0;
+			background-color: rgb(255,255,255);
+			opacity:0.3;
+		}
+			.displayHero:hover {
+				opacity: 1.0;
+			}
+
+		.displayHero .main {
+			width: 50px;
+			height: 58px;
+			background-repeat: no-repeat;
+			background-size: 132px 58px;
+		}
+
+		.selectedHero {
+			vertical-align: middle;
 		}
 
 		.T1 {
@@ -548,13 +651,23 @@
 		.T5 {
 			background-color: rgba(255,250,205,0.2)
 		}
-		
+
 		.none {
 			background-color: rgba(0,0,0,0.2);
 		}
 
 		/* DivTable.com */
+
+
 		.divTable {
+			border-width: 1px 1px 0px 0px;
+		}
+
+		.divInTable {
+			border-width: 0px 1px 0px 0px;
+		}
+
+		.divTable, divInTable {
 			display: table;
 			width: 100%;
 		}
@@ -594,8 +707,7 @@
 			.container {
 				width: 1500px;
 			}
-
 		}
-</style>
+	</style>
 
 </html>
