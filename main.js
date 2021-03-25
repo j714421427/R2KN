@@ -162,6 +162,8 @@
     function SetDisplay(id) {
         var selectedHero = $("#" + id).clone();
 
+		$(".displayHero .selectedHero").append(selectedHero);
+
         $(".hero" + modeSH +" .enable").each(function () {
 
             var tdDiv = $(this).parent();
