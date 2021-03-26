@@ -1,7 +1,32 @@
 
+    var path = "Img/";
+    var extName = ".jpg";
     var historyId = [];
     var heroCount = [];
     var modeSH = "";
+
+    var moveing = false;
+    var canclick = true, cur_clientX = 0, cur_clientY = 0;
+
+    $(window).mousemove(function (m) {
+        if (moveing) {
+            if (cur_clientX != m.pageX || cur_clientY != m.pageY) {
+                canclick = false;
+            }
+            window.scrollBy(cur_clientX - m.pageX, cur_clientY - m.pageY)
+        }
+    });
+
+    $(window).mousedown(function (m) {
+        cur_clientY = m.pageY;
+        cur_clientX = m.pageX;
+        moveing = true;
+        m.preventDefault()
+    });
+
+    $(window).mouseup(function (m) {
+        moveing = false;
+    });
 
     $(document).ready(function () {
 
@@ -30,11 +55,11 @@
 
         if (ishidden) {
             $(".historyUpdateContent").show();
-            $("#historyUpdate").val("隱藏歷史修改內容");
+            $(this).val("隱藏歷史修改內容");
         }
         else {
             $(".historyUpdateContent").hide();
-            $("#historyUpdate").val("顯示歷史修改內容");
+            $(this).val("顯示歷史修改內容");
         }
     });
 
@@ -62,21 +87,20 @@
         $("#straight").hide();
     });
 
-    $(document).on("click", ".hero div.divTableCell", function () {
-        CombineHeroHandler($(this).find(".main").attr("Id"));
+    $(document).on("mouseenter mouseleave", ".displayHero", function () {
+        ScaleDisplay(true);
     });
-	
-	$(document).on("click", ".displayHero .oc", function () {
 
-        var ishidden = $(".displayHero .divTableBody").is(":hidden");
+    $(document).on("mouseleave", ".displayHero", function () {
+        ScaleDisplay(false);
+    });
 
-        if (ishidden) {
-            $(".displayHero .divTableBody").show();
-            $(this).text("－");
-        }
-        else {
-            $(".displayHero .divTableBody").hide();
-            $(this).text("＋");
+    $(document).on("click", ".hero div.divTableCell", function () {
+
+        if (canclick) {
+            CombineHeroHandler($(this).find(".main").attr("Id"));
+        } else {
+            canclick = true;
         }
     });
 
@@ -157,14 +181,14 @@
     function ReSetDisplay() {
         $(".displayHero .main, .displayHero .countDiv, .displayHero .selectedCombineHero").remove();
         $(".displayHero").hide();
-    };
+    }
 
     function SetDisplay(id) {
         var selectedHero = $("#" + id).clone();
 
-		$(".displayHero .selectedHero").append(selectedHero);
+        $(".displayHero .selectedHero").append(selectedHero);
 
-        $(".hero" + modeSH +" .enable").each(function () {
+        $(".hero" + modeSH + " .enable").each(function () {
 
             var tdDiv = $(this).parent();
             var id = $(this).attr("id");
@@ -174,8 +198,23 @@
             }
         });
 
+        $(".displayHero .divTableCell.combinHero").hide();
+        $(".displayHero .divTableCell.skill").hide();
         $(".displayHero").show();
-    };
+    }
+
+    function ScaleDisplay(scale) {
+        var ishidden = $(".displayHero .divTableCell").is(":hidden");
+
+        if (scale && ishidden) {
+            $(".displayHero .divTableCell.combinHero").show();
+            $(".displayHero .divTableCell.skill").show();
+        }
+        else {
+            $(".displayHero .divTableCell.combinHero").hide();
+            $(".displayHero .divTableCell.skill").hide();
+        }
+    }
 
 
     //type 1:low 2:high
@@ -318,9 +357,6 @@
     }
 
     function SetFileH() {
-        var path = "Img/";
-        var extName = ".jpg";
-
         $(".heroH div.main").each(function (e) {
 
             var id = $(this).attr("Id");
@@ -342,9 +378,6 @@
     };
 
     function SetFileS() {
-        var path = "Img/";
-        var extName = ".jpg";
-
         $(".heroS div.main").each(function (e) {
 
             var id = $(this).attr("Id");

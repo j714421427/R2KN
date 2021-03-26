@@ -11,23 +11,27 @@
 	</head>
 
 	<body>
-
+	
 		<h2>R2KN</h2>
-		<h3 style="font-size:50px">Beta 1.1</h3>
+		<h3 style="font-size:50px">V 1.2</h3>
 		<div>
 			修改內容<br />
-			1.新增 組合秘笈 垂直/水平 功能<br />
-			2.新增 組合秘笈 右鍵返回英雄 EX: 1.左鍵點 女武神 2.左鍵點 符文騎士 3.點右鍵回 女武神<br />
-			3.新增 組合秘笈 右上快速顯示<br />
+			1.新增 組合秘笈 滑鼠拖曳滑動<br />
+			2.優化 組合秘笈 右上快速顯示<br />
 		</div>
 		<br />
-		<input id="historyUpdate" type="button"/>
+		<input id="historyUpdate" type="button" />
 
 		<div class="historyUpdateContent">
 			歷史<br />
 			Beta 1.0<br />
 			1.新增 組合秘笈<br />
 			2.新增 組合秘笈 簡易/標準版 功能<br />
+
+			V 1.1<br />
+			1.新增 組合秘笈 垂直/水平 功能<br />
+			2.新增 組合秘笈 右鍵返回英雄 EX: 1.左鍵點 女武神 2.左鍵點 符文騎士 3.點右鍵回 女武神<br />
+			3.新增 組合秘笈 右上快速顯示<br />
 		</div>
 
 		<br />
@@ -508,14 +512,13 @@
 		</div>
 
 		<div class="divTable displayHero">
-			<div class="oc">－</div>
 			<div class="divTableBody">
 				<div class="divTableRow">
 					<div class="divTableCell selectedHero">
 
 					</div>
-					<div class="divTableCell">
-						<div class="divInTable skill">
+					<div class="divTableCell skill">
+						<div class="divInTable">
 							<div class="divTableBody">
 								<div class="divTableRow skill1">
 									<div class="divTableCell content">技能 1 :</div>
@@ -535,8 +538,8 @@
 							</div>
 						</div>
 					</div>
-					<div class="divTableCell">
-						<div class="divInTable combinHero">
+					<div class="divTableCell combinHero">
+						<div class="divInTable">
 							<div class="divTableBody">
 								<div class="divTableRow T1">
 									<div class="divTableCell">T1</div>
@@ -565,172 +568,177 @@
 
 	<style>
 
-		input {
-			margin: 10px;
-		}
+		
+    input {
+        margin: 10px;
+    }
 
-		.enable {
-			opacity: unset;
-		}
+    .enable {
+        opacity: unset;
+    }
 
-		.disable {
-			opacity: 0.4;
-		}
+    .disable {
+        opacity: 0.4;
+    }
 
-		.countDiv {
-			margin-top: -20px;
-			text-align: right;
-			font-weight: 800;
-			background-color: rgba(255,255,255,0.2);
-		}
+    .countDiv {
+        margin-top: -20px;
+        text-align: right;
+        font-weight: 800;
+        background-color: rgba(255,255,255,0.2);
+    }
 
-			.countDiv p {
-				color: red;
-				text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-			}
+        .countDiv p {
+            color: red;
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+        }
 
-		.visHidden {
-			visibility: hidden;
-		}
+    .visHidden {
+        visibility: hidden;
+    }
 
-		.hero {
-			max-width: fit-content;
-		}
+    .hero {
+        max-width: fit-content;
+    }
 
-			.hero .main {
-				width: 132px;
-				height: 58px;
-				background-repeat: no-repeat;
-				background-size: 132px 58px;
-			}
+        .hero .main {
+            width: 132px;
+            height: 58px;
+            background-repeat: no-repeat;
+            background-size: 132px 58px;
+        }
 
-		.simple {
-			width: 50px !important;
-		}
+    .simple {
+        width: 50px !important;
+    }
 
-		.displayHero {
-			width: 60vw !important;
-			position: fixed;
-			top: 50px;
-			right: 0;
-			background-color: rgb(255,255,255);
-			opacity: 0.3;
-		}
+    .displayHero {
+        width: 10vw !important;
+        position: fixed;
+        top: 60px;
+        right: 0;
+        background-color: rgb(255,255,255);
+        opacity: 0.3;
+    }
 
-			.displayHero:hover {
-				opacity: 1.0;
-			}
+        .displayHero:hover {
+            top: 50px;
+            width: 60vw !important;
+            opacity: unset;
+        }
 
-			.displayHero .oc {
-				position: absolute;
-				border: 1px solid black;
-				cursor: pointer;
-				user-select: none;
-			}
+        .displayHero .selectedHero .main {
+            width: 132px;
+            height: 58px;
+            background-repeat: no-repeat;
+            background-size: 132px 58px;
+        }
 
-				.displayHero .oc:active {
-					background-color: gray;
-				}
+        .displayHero .selectedCombineHero .main {
+            width: 50px;
+            height: 58px;
+            background-repeat: no-repeat;
+            background-size: 132px 58px;
+        }
 
-			.displayHero .main {
-				width: 50px;
-				height: 58px;
-				background-repeat: no-repeat;
-				background-size: 132px 58px;
-			}
+        .displayHero .selectedHero {
+            width: 6vw;
+        }
 
-			.displayHero .combinHero {
-				width: 30vw;
-				overflow-x: scroll;
-			}
+        .displayHero .combinHero {
+            width: 30vw;
+            overflow-x: scroll;
+        }
 
-			.displayHero .skill .content {
-				height: 70px;
+            .displayHero .skill .content {
+                height: 70px;
                 display: block;
                 overflow: auto;
                 width: 24vw;
-			}
+            }
 
-		.selectedHero {
-			vertical-align: middle;
-		}
+    .selectedHero {
+        vertical-align: middle;
+    }
 
-		.T1 {
-			background-color: rgba(220,220,220,0.2)
-		}
+    .T1 {
+        background-color: rgba(220,220,220,0.2)
+    }
 
-		.T2 {
-			background-color: rgba(0,238,0,0.2)
-		}
+    .T2 {
+        background-color: rgba(0,238,0,0.2)
+    }
 
-		.T3 {
-			background-color: rgba(30,144,255,0.2)
-		}
+    .T3 {
+        background-color: rgba(30,144,255,0.2)
+    }
 
-		.T4 {
-			background-color: rgba(160,32,240,0.2)
-		}
+    .T4 {
+        background-color: rgba(160,32,240,0.2)
+    }
 
-		.T5 {
-			background-color: rgba(255,250,205,0.2)
-		}
+    .T5 {
+        background-color: rgba(255,250,205,0.2)
+    }
 
-		.none {
-			background-color: rgba(0,0,0,0.2);
-		}
+    .none {
+        background-color: rgba(0,0,0,0.2);
+    }
 
-		/* DivTable.com */
+    /* DivTable.com */
 
 
-		.divTable {
-			border-width: 1px 1px 0px 0px;
-		}
+    .divTable {
+        border-width: 1px 1px 0px 0px;
+        user-select: none;
+    }
 
-		.divInTable {
-			border-width: 0px 1px 0px 0px;
-		}
+    .divInTable {
+        border-width: 0px 1px 0px 0px;
+    }
 
-		.divTable, divInTable {
-			display: table;
-			width: 100%;
-		}
+    .divTable, divInTable {
+        display: table;
+        width: 100%;
+    }
 
-		.divTableRow {
-			display: table-row;
-		}
+    .divTableRow {
+        display: table-row;
+    }
 
-		.divTableHeading {
-			background-color: #EEE;
-			display: table-header-group;
-		}
+    .divTableHeading {
+        background-color: #EEE;
+        display: table-header-group;
+    }
 
-		.divTableCell, .divTableHead {
-			border: 1px solid #999999;
-			display: table-cell;
-			padding: 3px 10px;
-		}
+    .divTableCell, .divTableHead {
+        border: 1px solid #999999;
+        display: table-cell;
+        padding: 3px 10px;
+    }
 
-		.divTableHeading {
-			background-color: #EEE;
-			display: table-header-group;
-			font-weight: bold;
-		}
+    .divTableHeading {
+        background-color: #EEE;
+        display: table-header-group;
+        font-weight: bold;
+    }
 
-		.divTableFoot {
-			background-color: #EEE;
-			display: table-footer-group;
-			font-weight: bold;
-		}
+    .divTableFoot {
+        background-color: #EEE;
+        display: table-footer-group;
+        font-weight: bold;
+    }
 
-		.divTableBody {
-			display: table-row-group;
-		}
+    .divTableBody {
+        display: table-row-group;
+    }
 
-		@@media (min-width: 1200px) {
-			.container {
-				width: 1500px;
-			}
-		}
+    @@media (min-width: 1200px) {
+        .container {
+            width: 1500px;
+        }
+    }
+	
 	</style>
 	
 	<style>
