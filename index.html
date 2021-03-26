@@ -1,6 +1,4 @@
-﻿
-
-<html>
+﻿<html>
 
 	<head>
 
@@ -511,9 +509,12 @@
 			</div>
 		</div>
 
-		<div class="divTable displayHero">
+		<div class="divTable displayHero" id="displayHero" data-lock="false">
 			<div class="divTableBody">
 				<div class="divTableRow">
+					<div>
+						<i class="demo-icon icon-right-open" id="displayHerohide"></i>
+					</div>
 					<div class="divTableCell selectedHero">
 
 					</div>
@@ -562,10 +563,9 @@
 				</div>
 			</div>
 		</div>
-
 	</body>
 
-
+	<link rel="stylesheet" href="css/fontello.css">a
 	<style>
 
 		
@@ -614,6 +614,15 @@
 
     .displayHero {
         width: 10vw !important;
+        position: fixed;
+        top: 60px;
+        right: 0;
+        background-color: rgb(255,255,255);
+        opacity: 0.3;
+    }
+
+	.displayHero.lock {
+        width: 60vw !important;
         position: fixed;
         top: 60px;
         right: 0;
@@ -733,7 +742,19 @@
         display: table-row-group;
     }
 
-    @@media (min-width: 1200px) {
+	.demo-icon {
+		text-align: center;
+		width: 20px;
+		height: 20px;
+		padding: 2px 0px;
+		border: 3px solid;
+		border-radius: 50%;
+		vertical-align: top;
+		position: relative;
+		top: 10px;
+	}
+
+    @media (min-width: 1200px) {
         .container {
             width: 1500px;
         }
