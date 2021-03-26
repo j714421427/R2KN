@@ -207,8 +207,13 @@ function SetDisplay(id) {
         }
     });
 
-    $(".displayHero .divTableCell.combinHero").hide();
-    $(".displayHero .divTableCell.skill").hide();
+    let isLock = $("#displayHero").data("lock");
+
+    if(!isLock) {
+        $(".displayHero .divTableCell.combinHero").hide();
+        $(".displayHero .divTableCell.skill").hide();      
+    }
+    
     $(".displayHero").show();
 }
 
