@@ -3,7 +3,7 @@ var extName = ".jpg";
 var historyId = [];
 var heroCount = [];
 var modeSH = "";
-
+ 
 var moveing = false;
 var canclick = true,
     cur_clientX = 0,
